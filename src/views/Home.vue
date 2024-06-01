@@ -43,6 +43,7 @@
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  margin-left: 2%;
 }
 
 .left-side {

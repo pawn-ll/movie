@@ -48,10 +48,17 @@ async function updateChartWithData(movieCodeValue) {
       },
         xAxis: {
           data: data.xaxis,
+          show :true,
+          name: '时间', // 添加x轴名称
+          nameLocation: 'middle', // 将名称放在中间位置
+          nameGap: 20, // 调整名称与轴线的距离
       },
         yAxis: {
           type: 'value',
           show :true,
+          name: '票房（万元）', // 添加y轴名称
+          nameLocation: 'top', // 将名称放在中间位置
+          nameGap: 20, // 调整名称与轴线的距离
       },
       
         series: [

@@ -1,4 +1,5 @@
 <template>
+  <div class="title" > 近期每日票房 </div>
   <div ref="chartContainer" :style="{ width: '100%', height: '400px' }"></div>
 </template>
 
@@ -10,12 +11,6 @@ import axios from 'axios';
 const chartContainer = ref(null);
 let chartInstance = ref(null);
 
-// 数据结构示例
-const mockData = [
-  { date: '2023-05-01', boxOffice: 10000 },
-  { date: '2023-05-02', boxOffice: 15000 },
-  // 更多数据...
-];
 
 // 获取票房数据的函数
 async function fetchBoxOfficeData() {
@@ -48,10 +43,16 @@ async function initChart() {
     xAxis: {
       type: 'category',
       data: data.xaxis,
+      name: '时间', // 添加x轴名称
+      nameLocation: 'end', // 将名称放在中间位置
+      nameGap: 20, // 调整名称与轴线的距离
     },
     yAxis: {
       type: 'value',
       show :true,
+      name: '票房（万元）', // 添加y轴名称
+      nameLocation: 'end', // 将名称放在中间位置
+      nameGap: 20, // 调整名称与轴线的距离
     },
     
     series: [
@@ -78,5 +79,11 @@ onMounted(async () => {
 });
 </script>
 <style scoped>
-
+.title {
+    color: crimson;
+    font-size: 25px;
+    font-weight: bold;
+    margin-left: 20%;
+    margin-top: 10%;
+}
 </style>

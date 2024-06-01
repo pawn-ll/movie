@@ -1,6 +1,6 @@
 <template>
     <div class="box-office-container">
-       <h1>今日电影票房:  {{ boxOfficeTotal }}</h1>
+       <h1 class="custom-h1">今日电影总票房:  {{ boxOfficeTotal }}</h1>
        <p v-if="loading">加载中...</p>
 
        <el-table  :data="movies"  style="width: 100%" v-if="!loading">
@@ -95,3 +95,12 @@
      },
    };
    </script>
+
+   <style scoped>
+     .custom-h1 {
+       color: crimson;
+       font-size: 35px;
+       margin-left: 3%;
+       font-weight: bold;
+     }
+   </style>

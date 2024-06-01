@@ -6,14 +6,16 @@
         <img :src="movie.posterBase64" alt="电影海报" class="movie-poster" />
       </div>
       <div class="movie-meta">
-        <p><strong>导演:</strong> {{ movie.director }}</p>
-        <p><strong>编剧:</strong> {{ movie.scripter }}</p>
-        <p><strong>演员:</strong> {{ movie.actor }}</p>
-        <p><strong>类型:</strong> {{ movie.type }}</p>
-        <p><strong>影片时长:</strong> {{ movie.length }}</p>
-        <p><strong>制片地区:</strong> {{ movie.area }}</p>
-        <p><strong>上映日期:</strong> {{ movie.releaseDate }}</p>
-        <p><strong>总票房:</strong> {{ movie.sumBoxOffice }}</p>
+      
+        <p v-if="movie.director"><span class="inner-label">导演:</span> {{ movie.director }}</p>
+        <p v-if="movie.scripter"><span class="inner-label">编剧:</span> {{ movie.scripter }}</p>
+        <p v-if="movie.actor"><span class="inner-label">演员:</span> {{ movie.actor }}</p>
+        <p v-if="movie.type"><span class="inner-label">类型:</span> {{ movie.type }}</p>
+        <p v-if="movie.length"><span class="inner-label">影片时长:</span> {{ movie.length }}</p>
+        <p v-if="movie.area"><span class="inner-label">制片地区:</span> {{ movie.area }}</p>
+        <p v-if="movie.releaseDate"><span class="inner-label">上映日期:</span> {{ movie.releaseDate }}</p>
+        <p v-if="movie.sumBoxOffice"><span class="inner-label">总票房:</span> {{ movie.sumBoxOffice }}</p>
+        
       </div>
       
       <div class="movie-chart" >
@@ -98,10 +100,17 @@ async function updateChartWithData(movieCodeValue) {
       },
         xAxis: {
           data: data.xaxis,
+          show :true,
+          name: '时间', // 添加x轴名称
+          nameLocation: 'end', // 将名称放在中间位置
+          nameGap: 20, // 调整名称与轴线的距离
       },
         yAxis: {
           type: 'value',
           show :true,
+          name: '票房（万元）', // 添加y轴名称
+          nameLocation: 'end', // 将名称放在中间位置
+          nameGap: 20, // 调整名称与轴线的距离
       },
       
         series: [
@@ -133,8 +142,12 @@ onMounted(() => {
 }
 
 .movie-name {
+  margin-left: 2%;
   text-align: left;
   margin-bottom: 1rem;
+  font-size: 30px;
+  font-weight: bold;
+  color: palevioletred;
 }
 
 .poster-info-container {
@@ -172,12 +185,20 @@ onMounted(() => {
   text-align: center; 
 }
 .movie-chart p {
-  color :coral;
+    color: crimson;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 1%;
 }
 .introduction {
   text-align: justify;
   margin-top: 1rem;
   padding: 1rem;
   border-top: 1px solid #ccc;
+}
+.inner-label{
+  font-size: 20px;
+  color: burlywood;
+  font-weight: bold;
 }
 </style>
