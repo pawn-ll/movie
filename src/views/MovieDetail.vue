@@ -60,7 +60,7 @@ const movie = ref({
 async function fetchMoiveData(movieCodeValue) {
         // console.log(movieCodeValue);
         try {
-            const response = await axios.get('http://localhost:8081/movie/detail',{
+            const response = await axios.get('http://1.14.58.251:8081/movie/detail',{
             params:{
                 movieCode: movieCodeValue,
             }
@@ -74,7 +74,7 @@ async function fetchMoiveData(movieCodeValue) {
 };
 async function fetchMoiveLine(movieCodeValue) {
     try {
-        const response = await axios.get('http://localhost:8081/dailyBoxoffice/week-histoygram',{
+        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/week-histoygram',{
         params:{
             movieCode: movieCodeValue,
         }

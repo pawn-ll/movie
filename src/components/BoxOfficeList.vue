@@ -24,7 +24,7 @@ let router = ref(null);
 
 async function getList(){
     try {
-          const response = await axios.get('http://localhost:8081/dailyBoxoffice/week-list'); 
+          const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/week-list'); 
         //   console.log(data);
           latestMovies.value = response.data.data;
          } 

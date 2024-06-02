@@ -15,7 +15,7 @@ let chartInstance = ref(null);
 // 获取票房数据的函数
 async function fetchBoxOfficeData() {
   try {
-    const response = await axios.get('http://localhost:8081/dailySumBoxoffice/histoygram'); // 替换为你的后端接口地址
+    const response = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/histoygram'); // 替换为你的后端接口地址
     // 处理返回的数据，格式化为适合 Echarts 的数据结构
     // console.log(response.data);
     const formattedData = response.data.data;

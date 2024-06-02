@@ -57,7 +57,7 @@
        // 异步获取数据
        async function getBoxOffice() {
          try {
-          const response = await axios.get('http://localhost:8081/dailyBoxoffice/today'); // 替换为你的实际API URL
+          const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/today'); // 替换为你的实际API URL
           const data = await response.data;
           // console.log(response);
           // console.log(data);
@@ -70,7 +70,7 @@
        }
        async function getDaySum() {
          try {
-          const response = await axios.get('http://localhost:8081/dailySumBoxoffice/today'); // 替换为你的实际API URL
+          const response = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/today'); // 替换为你的实际API URL
           const data = await response.data;
           boxOfficeTotal.value = data.data.sumBoxoffice;
           // console.log(data);

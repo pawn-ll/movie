@@ -21,7 +21,7 @@
   // 获取票房数据的函数
   async function fetchMoiveData(movieCodeValue) {
     try {
-        const response = await axios.get('http://localhost:8081/dailyBoxoffice/histoygram', {
+        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/histoygram', {
         params: {
           movieCode: movieCodeValue,
         },
