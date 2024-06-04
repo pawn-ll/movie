@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MovieDetail from '@/views/MovieDetail.vue';
 import Home from '@/views/Home.vue';
+import SearchResult from '@/views/SearchResult.vue';
 
 // 引入Vue Router的类型定义
 import type { RouteRecordRaw } from 'vue-router';
@@ -17,6 +18,12 @@ const routes: RouteRecordRaw[] = [
       name: 'movie-detail',
       component: MovieDetail,
       props: true,
+    },
+    {
+      path:'/search-result/:movieName',
+      name:'search',
+      component:SearchResult,
+      props:true,
     },
     // 更多路由...
 ];

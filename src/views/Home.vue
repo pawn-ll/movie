@@ -16,7 +16,7 @@
 <script  >
   import DayBoxOffice from '@/components/DayBoxOffice.vue';
   import DayBar from '@/components/DayBar.vue';
-  import BoxOfficeList from '@/components/BoxOfficeList.vue'
+  import BoxOfficeList from '@/components/BoxOfficeList.vue';
   
     export default  {
       components: {

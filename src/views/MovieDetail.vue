@@ -65,6 +65,7 @@ async function fetchMoiveData(movieCodeValue) {
                 movieCode: movieCodeValue,
             }
             })
+            console.log(response);
             movie.value = response.data.data;
             
         } 
