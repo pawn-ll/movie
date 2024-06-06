@@ -3,16 +3,15 @@
     <v-card-title>
       选择日期范围
     </v-card-title>
-    <v-card-text>
+    
       <v-row>
         <v-col cols="6">
-          <v-date-picker v-model="startDate" :max="endDate" @input="updateRange"></v-date-picker>
+          <v-date-picker v-model="startDate"  :max="endDate" ></v-date-picker>
         </v-col>
         <v-col cols="6">
-          <v-date-picker v-model="endDate" :min="startDate" @input="updateRange"></v-date-picker>
+          <v-date-picker v-model="endDate" :min="startDate" ></v-date-picker>
         </v-col>
       </v-row>
-    </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn color="primary" @click="$emit('closeDialog')">关闭</v-btn>

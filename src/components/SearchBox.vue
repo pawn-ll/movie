@@ -61,6 +61,8 @@ onMounted(() =>{
 }
 
 .search-button {
+  background-color: #007bff; 
+  color: white;
   font-size: 20px;
   width: 70px;
 }
