@@ -1,14 +1,19 @@
 <template>
     
     <div class="box-office-container">
-       <h1 class="custom-h1">今日电影总票房:  {{ boxOfficeTotal }}</h1>
+       <h1 class="custom-h1">今日总票房:  {{ boxOfficeTotal }}</h1>
        <div class="search-box-wrapper">
         <SearchBox></SearchBox>
+        <TypeBox @selected="handleSelected"/>
       </div>
        <p v-if="loading">加载中...</p>
        <div class="table-container" >
        <el-table  :data="movies"  style="width: 100%" v-if="!loading">
-         <el-table-column prop="movieName" label="电影名称"></el-table-column>
+        <el-table-column prop="movieName" label="电影名称" width="220">
+            <template #default="{ row }">
+            <span :style="{ fontWeight: 'bold', color: '#333',fontSize:'15px' }">{{ row.movieName }}</span>
+            </template>
+         </el-table-column>
          <el-table-column prop="sumBoxoffice" label="目前总票房"></el-table-column>
          <el-table-column prop="dayBoxoffice" label="今日票房（万元）"></el-table-column>
          <el-table-column prop="dayBoxofficeRate" label="今日票房占比"></el-table-column>
@@ -40,13 +45,19 @@
    import { ref,  onMounted } from 'vue';
    import axios from 'axios';
    import SearchBox from '@/components/SearchBox.vue'
+   import TypeBox from '@/components/TypeBox.vue'
 
    export default {
     components: {
         SearchBox,
+        TypeBox,
      },
      methods: {
-     selectMovie(movieCode) {
+      handleSelected(option, value) {
+         console.log('Selected option:', option, 'Value:', value);
+         // 处理选中的选项和值并发送请求
+       },
+      selectMovie(movieCode) {
         this.$emit('select-movie', movieCode);
         this.$router.push({
              name: 'movie-detail', 
@@ -114,12 +125,13 @@
    .box-office-container {
       display: flex;
       flex-wrap: wrap; /* 允许换行 */
-      gap: 16px; /* 行间间距，可根据需要调整 */
+      gap: 6px; /* 行间间距，可根据需要调整 */
 }
      .custom-h1 {
        color: crimson;
-       font-size: 35px;
+       font-size: 30px;
        margin-left: 3%;
+       margin-top: 3%;
        font-weight: bold;
      }
     .search-box-wrapper {

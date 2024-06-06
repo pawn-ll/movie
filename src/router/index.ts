@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MovieDetail from '@/views/MovieDetail.vue';
 import Home from '@/views/Home.vue';
 import SearchResult from '@/views/SearchResult.vue';
+import Statis from '@/views/StatisPage.vue';
 
 // 引入Vue Router的类型定义
 import type { RouteRecordRaw } from 'vue-router';
@@ -24,6 +25,11 @@ const routes: RouteRecordRaw[] = [
       name:'search',
       component:SearchResult,
       props:true,
+    },
+    {
+      path:'/statis',
+      name:'statis',
+      component:Statis,
     },
     // 更多路由...
 ];
