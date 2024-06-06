@@ -3,7 +3,7 @@
        <el-table  :data="movies"  style="width: 100%" >
          <el-table-column prop="movieName" label="电影名称" width="220">
             <template #default="{ row }">
-            <span :style="{ fontWeight: 'bold', color: '#333',fontSize:'30px' }">{{ row.movieName }}</span>
+            <span :style="{ fontWeight: 'bold', color: '#333',fontSize:'15px' }">{{ row.movieName }}</span>
             </template>
          </el-table-column>
          <el-table-column prop="statisSumBoxoffice" label="合计票房（万元）"></el-table-column>
@@ -48,7 +48,7 @@ export default {
     },
     computed: {
         dateRange() {
-            const dateRangeString = this.$route.query.dateRange;
+            const dateRangeString = sessionStorage.getItem('dateRange');
             if (dateRangeString) {
             try {
                 return JSON.parse(dateRangeString);
@@ -68,7 +68,7 @@ export default {
         
         const response = await axios.post('http://localhost:8081/statisBoxoffice/statis', {
                 statisType: dateRange.type,
-                statisInterval: null,
+                statisInterval: dateRange.interval,
                 startDate: dateRange.start,
                 endDate: dateRange.end,
             },{
