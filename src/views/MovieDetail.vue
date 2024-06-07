@@ -1,4 +1,5 @@
 <template>
+  <button @click="goBack" class="back-button">返回</button>
   <div class="movie-detail">
     <h1 class="movie-name">{{ movie.movieName }}</h1>
     <div class="poster-info-container">
@@ -33,7 +34,12 @@ import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import * as echarts from 'echarts';
 
-
+const goBack = () => {
+  if (typeof window !== 'undefined') { // 确保在浏览器环境中执行
+    // 返回上一页
+    window.history.back();
+  }
+};
 const props = defineProps({
   movieCode: {
     type: Number,
@@ -201,5 +207,11 @@ onMounted(() => {
   font-size: 20px;
   color: burlywood;
   font-weight: bold;
+}
+.back-button {
+  font-size: 30px;
+  font-weight: bolder;
+  background: #488ae6;
+  height: 50px;
 }
 </style>

@@ -1,4 +1,5 @@
 <template>
+  <button @click="goBack" class="back-button">返回</button>
 <div class="table-container" >
        <el-table  :data="movies"  style="width: 100%" >
          <el-table-column prop="movieName" label="电影名称" width="220">
@@ -61,6 +62,12 @@ export default {
     },
   },
     methods: {
+    goBack  ()  {
+        if (typeof window !== 'undefined') { // 确保在浏览器环境中执行
+          // 返回上一页
+          window.history.back();
+      }
+    },
     async fetchDataFromBackend() {
       try {
         this.isFetching = true;
@@ -110,5 +117,11 @@ export default {
 </script>
 
 <style scoped>
+.back-button {
+  font-size: 30px;
+  font-weight: bolder;
+  background: #488ae6;
+  height: 50px;
+}
 
 </style>

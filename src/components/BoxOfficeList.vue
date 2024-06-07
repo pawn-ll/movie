@@ -4,7 +4,7 @@
         <p class="custom-p"> 近期热门榜</p>
         <li v-for="movie in latestMovies" :key="movie.movieCode" @click="goToMovieDetail(movie.movieCode)" >
         <div class=" left">{{movie.movieName}}</div> 
-        <div class=" right">{{ movie.sumBoxoffice }}</div>
+        <div class=" right">{{ movie.statisSumBoxoffice }}</div>
        
         </li>
     </div>

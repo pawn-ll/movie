@@ -1,4 +1,5 @@
 <template>
+    <button @click="goBack" class="back-button">返回</button>
     <div class="search-result container">
         <header class="header-flex">
             <h1 class="title">搜索结果</h1>
@@ -56,7 +57,12 @@ const props = defineProps({
   }
 });
 
-
+const goBack = () => {
+  if (typeof window !== 'undefined') { // 确保在浏览器环境中执行
+    // 返回上一页
+    window.history.back();
+  }
+};
 const currentPage = ref(1);
 const pageSize = 5;
 const results = ref([]);
@@ -108,6 +114,12 @@ onMounted(() => {
 
 </script>
 <style scoped>
+.back-button {
+  font-size: 30px;
+  font-weight: bolder;
+  background: #488ae6;
+  height: 50px;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;
