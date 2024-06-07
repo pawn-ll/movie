@@ -6,6 +6,9 @@
         </header>
       <div v-if="loading" class="loading">加载中...</div>
       <div v-if="error" class="error">{{ error }}</div>
+      <div v-if="totalPages < 1">
+        <p>暂无搜索结果</p>
+      </div>
       <div v-if="results.length > 0">
         <ul class="result-list">
           <li v-for="result in results" :key="result.movieCode" class="result-item">
@@ -65,7 +68,7 @@ async function fetchResults(movieNameValue) {
   try {
     loading.value = true;
     console.log(movieNameValue);
-    const response = await axios.post('http://localhost:8081/movie/search', {
+    const response = await axios.post('http://1.14.58.251:8081/movie/search', {
         movieName: movieNameValue,
         current: currentPage.value,
         size: pageSize,

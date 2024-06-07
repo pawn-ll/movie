@@ -66,7 +66,7 @@ export default {
         this.isFetching = true;
         const dateRange = this.dateRange;
         
-        const response = await axios.post('http://localhost:8081/statisBoxoffice/statis', {
+        const response = await axios.post('http://1.14.58.251:8081/statisBoxoffice/statis', {
                 statisType: dateRange.type,
                 statisInterval: dateRange.interval,
                 startDate: dateRange.start,

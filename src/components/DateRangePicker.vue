@@ -101,10 +101,18 @@ export default {
       // 如果需要，可以在跳转前处理日期范围数据，例如保存到Vuex store
     },
     navigateToStatsPage() {
+      const startDate = dayjs(this.startDate);
+      const endDate = dayjs(this.endDate);
+      // 检查日期范围是否超过90天
+      if (endDate.diff(startDate, 'day') > 90) {
+        // console.error('日期范围不能超过90天');
+        alert('日期范围不能超过90天');
+        return;
+      }
         const dateRange = {
             type : 0,
-            start: dayjs(this.startDate).format('YYYY-MM-DD'),
-            end: dayjs(this.endDate).format('YYYY-MM-DD'),
+            start: startDate.format('YYYY-MM-DD'),
+            end: endDate.format('YYYY-MM-DD'),
         };
         const dateRangeString = JSON.stringify(dateRange);
         sessionStorage.setItem('dateRange', dateRangeString);
