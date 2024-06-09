@@ -1,12 +1,16 @@
 <template>
     
     <div class="box-office-container">
-       <h1 class="custom-h1">今日总票房:  {{ boxOfficeTotal }}</h1>
+       <h1 class="custom-h1">  总票房:  {{ boxOfficeTotal }}</h1>
        <div class="search-box-wrapper">
         <SearchBox></SearchBox>
         <TypeBox @selected="handleSelected"/>
       </div>
-       <p v-if="loading">加载中...</p>
+      <div class="btn-wrapper">
+      <v-btn @click="previous" >前一天</v-btn>
+      <v-btn @click="next" >后一天</v-btn>
+     </div>
+      <p v-if="loading">加载中...</p>
        <div class="table-container" >
        <el-table  :data="movies"  style="width: 100%" v-if="!loading">
         <el-table-column prop="movieName" label="电影名称" width="220">
@@ -43,6 +47,7 @@
 
 <script>
    import { ref,  onMounted } from 'vue';
+   import dayjs from 'dayjs';
    import axios from 'axios';
    import SearchBox from '@/components/SearchBox.vue'
    import TypeBox from '@/components/TypeBox.vue'
@@ -53,6 +58,7 @@
         TypeBox,
      },
      methods: {
+      
       handleSelected(option, value) {
          console.log('Selected option:', option, 'Value:', value);
          // 处理选中的选项和值并发送请求
@@ -72,6 +78,54 @@
        const loading = ref(true);
        const boxOfficeTotal = ref(0); // 假设这是今日总票房
        const movies = ref([]);
+       let day = ref(new Date());
+       let timerId = ref(null);
+
+       const  handlePrevious = async() => {
+      // 实现你的逻辑，比如改变某个状态
+        day.value = dayjs(day.value).subtract(1, 'day');
+        const dayString = dayjs(day.value).format('YYYY-MM-DD');
+        const response = await axios.get('http://localhost:8081/dailyBoxoffice/day',{
+            params:{
+                date: dayString,
+            }
+            });
+        const sumResponse = await axios.get('http://localhost:8081/dailySumBoxoffice/day',{
+            params:{
+                date: dayString,
+            }
+            });
+        console.log(response);
+        movies.value = response.data.data;
+        boxOfficeTotal.value = sumResponse.data.data.sumBoxoffice;
+        if (timerId != null) {
+        clearInterval(timerId);
+        timerId = null; // 可选：重置定时器ID，表示定时器已停
+      }
+    };
+    const handleNext = async() => {
+        day.value = dayjs(day.value).subtract(-1, 'day');
+        const dayString = dayjs(day.value).format('YYYY-MM-DD');
+        console.log(dayString);
+        const response = await axios.get('http://localhost:8081/dailyBoxoffice/day',{
+            params:{
+                date: dayString,
+            }
+            });
+        const sumResponse = await axios.get('http://localhost:8081/dailySumBoxoffice/day',{
+            params:{
+                date: dayString,
+            }
+            });
+        console.log(response);
+        movies.value = response.data.data;
+        boxOfficeTotal.value = sumResponse.data.data.sumBoxoffice;
+        if (timerId != null) {
+        clearInterval(timerId);
+        timerId = null; // 可选：重置定时器ID，表示定时器已停
+      }
+    };
+
 
        // 异步获取数据
        async function getBoxOffice() {
@@ -108,20 +162,40 @@
         }
         updateData();
 
-        setInterval(updateData, 1000*10 );
+        timerId = setInterval(updateData, 1000*10 );
        });
 
        return {
-        loading,
+         loading,
          boxOfficeTotal,
          movies,
-      
+         previous :handlePrevious,
+         next :handleNext,
+         
        };
      },
    };
    </script>
 
    <style scoped>
+   .btn-wrapper {
+  margin-left: 15%;
+  margin-bottom: 5%;
+  /* 自定义样式，如背景色、内外边距等 */
+  background-color: #f5f5f5; /* 示例背景色 */
+}
+
+/* 如果需要调整按钮本身的样式 */
+.v-btn {
+  height: 100px;
+  width: 200px;
+  /* 示例：增加一些间距 */
+  margin: 0 10px;
+  /* 更改按钮颜色、大小等 */
+  color: #3f51b5;
+  font-size: 16px;
+  /* 其他样式根据需求添加 */
+}
    .box-office-container {
       display: flex;
       flex-wrap: wrap; /* 允许换行 */
