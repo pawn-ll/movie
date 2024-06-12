@@ -86,12 +86,12 @@
       // 实现你的逻辑，比如改变某个状态
         day.value = dayjs(day.value).subtract(1, 'day');
         const dayString = dayjs(day.value).format('YYYY-MM-DD');
-        const response = await axios.get('http://localhost:8081/dailyBoxoffice/day',{
+        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/day',{
             params:{
                 date: dayString,
             }
             });
-        const sumResponse = await axios.get('http://localhost:8081/dailySumBoxoffice/day',{
+        const sumResponse = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/day',{
             params:{
                 date: dayString,
             }
@@ -111,12 +111,12 @@
         day.value = dayjs(day.value).subtract(-1, 'day');
         const dayString = dayjs(day.value).format('YYYY-MM-DD');
         console.log(dayString);
-        const response = await axios.get('http://localhost:8081/dailyBoxoffice/day',{
+        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/day',{
             params:{
                 date: dayString,
             }
             });
-        const sumResponse = await axios.get('http://localhost:8081/dailySumBoxoffice/day',{
+        const sumResponse = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/day',{
             params:{
                 date: dayString,
             }
