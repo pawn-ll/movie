@@ -52,9 +52,9 @@ onMounted(() =>{
   gap: 6px; /* 在两个元素之间添加间距，可根据需要调整 */
 }
 .search-input {
-  width: 200px;
-  height: 35px;
-  font-size: 16px;
+  width: 300px;
+  height: 40px;
+  font-size: 20px;
   padding: 8px; /* 可选，增加内边距使输入框看起来更舒适 */
   border: 3px solid #ccc; /* 添加边框 */
   border-radius: 4px; /* 添加圆角，可选 */
@@ -64,6 +64,6 @@ onMounted(() =>{
   background-color: #007bff; 
   color: white;
   font-size: 20px;
-  width: 70px;
+  width: 100px;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
     
     <div class="box-office-container">
-       <h1 class="custom-h1">  总票房:  {{ boxOfficeTotal }}</h1>
+      <div class="header-actions">
+        <v-btn @click="previous" class="action-btn">前一天</v-btn>
+        <h1 class="custom-h1"> {{ dayStr }} 总票房: {{ boxOfficeTotal }}</h1>
+        <v-btn @click="next" class="action-btn">后一天</v-btn>
+      </div>
        <div class="search-box-wrapper">
         <SearchBox></SearchBox>
-        <TypeBox @selected="handleSelected"/>
+        <TypeBox></TypeBox>
       </div>
-      <div class="btn-wrapper">
-      <v-btn @click="previous" >前一天</v-btn>
-      <v-btn @click="next" >后一天</v-btn>
-     </div>
       <p v-if="loading">加载中...</p>
        <div class="table-container" >
        <el-table  :data="movies"  style="width: 100%" v-if="!loading">
@@ -59,10 +59,6 @@
      },
      methods: {
       
-      handleSelected(option, value) {
-         console.log('Selected option:', option, 'Value:', value);
-         // 处理选中的选项和值并发送请求
-       },
       selectMovie(movieCode) {
         this.$emit('select-movie', movieCode);
         this.$router.push({
@@ -79,6 +75,7 @@
        const boxOfficeTotal = ref(0); // 假设这是今日总票房
        const movies = ref([]);
        let day = ref(new Date());
+       const dayStr = ref(null);
        let timerId = ref(null);
        const today = dayjs().format('YYYY-MM-DD');
 
@@ -86,6 +83,7 @@
       // 实现你的逻辑，比如改变某个状态
         day.value = dayjs(day.value).subtract(1, 'day');
         const dayString = dayjs(day.value).format('YYYY-MM-DD');
+        dayStr.value = dayString;
         const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/day',{
             params:{
                 date: dayString,
@@ -110,7 +108,7 @@
       }
         day.value = dayjs(day.value).subtract(-1, 'day');
         const dayString = dayjs(day.value).format('YYYY-MM-DD');
-        console.log(dayString);
+        dayStr.value = dayString;
         const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/day',{
             params:{
                 date: dayString,
@@ -165,7 +163,7 @@
          getDaySum();
         }
         updateData();
-
+        dayStr.value = dayjs(day.value).format('YYYY-MM-DD');
         timerId = setInterval(updateData, 1000*10 );
        });
 
@@ -175,19 +173,13 @@
          movies,
          previous :handlePrevious,
          next :handleNext,
-         
+         dayStr,
        };
      },
    };
    </script>
 
    <style scoped>
-   .btn-wrapper {
-  margin-left: 15%;
-  margin-bottom: 5%;
-  /* 自定义样式，如背景色、内外边距等 */
-  background-color: #f5f5f5; /* 示例背景色 */
-}
 
 /* 如果需要调整按钮本身的样式 */
 .v-btn {
@@ -209,16 +201,34 @@
        color: crimson;
        font-size: 30px;
        margin-left: 3%;
-       margin-top: 3%;
+       margin-top: 1%;
        font-weight: bold;
      }
     .search-box-wrapper {
       flex: 1; /* 让h1和SearchBox在一行内平均分配空间，可调整为具体比例 */
     }
+    .header-actions {
+  display: flex; /* 使用Flexbox布局 */
+  justify-content: space-between; /* 横向两端对齐，使元素分散排列 */
+  align-items: center; /* 垂直居中对齐 */
+  width: 100%;
+  margin-bottom: 1rem; /* 可根据需要调整间距 */
+}
+    .action-btn {
+  /* 可以在这里添加按钮的具体样式，例如宽度、高度等 */
+  font-size: 20px;
+  font-weight: bold;
+  color: #000;
+  background-color: #26e6e3;
+  min-width: 100px; /* 示例按钮宽度 */
+}
 
     .search-box-wrapper {
       display: flex; /* 使SearchBox能够水平居中或调整对齐方式 */
       align-items: center; /* 垂直居中对齐 */
+      justify-content: center; /* 添加这一行以实现水平居中 */
+      height: 50px;
+      margin-left: 20%;
 }
 
     .table-container {
