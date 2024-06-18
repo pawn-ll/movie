@@ -9,14 +9,20 @@
       <BoxOfficeList />
       <!-- <BarChart :movieCode="selectedMovieCode" /> -->
     </div>
-   
+  
     <!-- <BarChart /> -->
   </div>
+  <div class="page-footer ">
+    <p>网站总访问量 {{ totalVisits }}  ,  今日网站访问量 {{ todayVisits }}</p>
+    
+   </div>
 </template>
 <script  >
   import DayBoxOffice from '@/components/DayBoxOffice.vue';
   import DayBar from '@/components/DayBar.vue';
   import BoxOfficeList from '@/components/BoxOfficeList.vue';
+  import { ref } from 'vue';
+  import axios from 'axios';
   
     export default  {
       components: {
@@ -28,6 +34,8 @@
      data() {
        return {
         selectedMovieCode: 545277882671173,
+        totalVisits: ref(0), // 网站总访问量
+        todayVisits: ref(0), // 今日网站访问量
        }
      },
      methods: {
@@ -35,6 +43,20 @@
           this.selectedMovieCode = movieCodeValue;
           console.log(this.selectedMovieCode);
         },
+        async fetchWebsiteVisits() {
+          try {
+          const response = await axios.get('http://localhost:8081/site/count'); // 请替换为实际的API路径
+          console.log(response);
+          this.totalVisits = response.data.data.siteVisitorCount;
+          this.todayVisits = response.data.data.siteVisitorTodayCount;
+        
+        } catch (error) {
+        console.error('Error fetching website visits:', error);
+        }
+        },
+      },
+      created() {
+        this.fetchWebsiteVisits();
       },
    };
 </script>
@@ -63,5 +85,18 @@
   .right-side {
     flex: 1;
   }
+}
+.page-footer {
+  /* 新增样式，使底部固定在页面底部 */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff; /* 根据需要调整背景色 */
+  padding: 1rem; /* 可选，增加内边距 */
+  text-align: center; /* 文本居中 */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* 可选，底部阴影效果 */
+  font-size: 20px;
+  color: coral;
 }
 </style>
