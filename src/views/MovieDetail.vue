@@ -19,7 +19,7 @@
         
       </div>
       
-      <div class="movie-chart" v-if="chartContainer" >
+      <div class="movie-chart" v-if="line">
         <p>电影首周票房</p>
         <div ref="chartContainer" :style="{ width: '100%', height: '300px' }"></div>
       </div>
@@ -48,6 +48,7 @@ const props = defineProps({
 });
 const chartContainer = ref(null);
 let chartInstance = null;
+const line = ref(true);
 const movie = ref({
   movieName: '',
   poster: '',
@@ -71,7 +72,7 @@ async function fetchMoiveData(movieCodeValue) {
                 movieCode: movieCodeValue,
             }
             })
-            console.log(response);
+            // console.log(response);
             movie.value = response.data.data;
             
         } 
@@ -96,7 +97,9 @@ async function fetchMoiveLine(movieCodeValue) {
 
 async function updateChartWithData(movieCodeValue) {
   const data = await fetchMoiveLine(movieCodeValue);
-  if(!data){
+  // console.log(data);
+  if(data==null){
+    line.value = false;
     return;
   }
   chartInstance = echarts.init(chartContainer.value);
@@ -139,7 +142,7 @@ onMounted(() => {
     // console.log(props.movieCode);
     fetchMoiveData(props.movieCode);
     updateChartWithData(props.movieCode);
-    console.log(movie);
+    // console.log(movie);
 });
 </script>
 
