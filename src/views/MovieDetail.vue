@@ -1,7 +1,7 @@
 <template>
   <button @click="goBack" class="back-button">返回</button>
-  <div class="movie-detail">
-    <h1 class="movie-name">{{ movie.movieName }}</h1>
+  <div class="movie-detail" >
+    <h1 class="movie-name" v-if="movie.movieName">{{ movie.movieName }}</h1>
     <div class="poster-info-container">
       <div class="movie-poster">
         <img :src="movie.posterBase64" alt="电影海报" class="movie-poster" />
@@ -19,7 +19,7 @@
         
       </div>
       
-      <div class="movie-chart" >
+      <div class="movie-chart" v-if="chartContainer" >
         <p>电影首周票房</p>
         <div ref="chartContainer" :style="{ width: '100%', height: '300px' }"></div>
       </div>
@@ -96,6 +96,9 @@ async function fetchMoiveLine(movieCodeValue) {
 
 async function updateChartWithData(movieCodeValue) {
   const data = await fetchMoiveLine(movieCodeValue);
+  if(!data){
+    return;
+  }
   chartInstance = echarts.init(chartContainer.value);
   if (chartInstance) {
       const option = {
