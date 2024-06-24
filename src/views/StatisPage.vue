@@ -35,6 +35,7 @@
 <script>
 import { ref,  onMounted } from 'vue';
 import axios from 'axios';
+import { apis } from '@/ApiConfig';
 
 
 export default {
@@ -73,7 +74,7 @@ export default {
         this.isFetching = true;
         const dateRange = this.dateRange;
         
-        const response = await axios.post('http://1.14.58.251:8081/statisBoxoffice/statis', {
+        const response = await axios.post(apis.statisPage, {
                 statisType: dateRange.type,
                 statisInterval: dateRange.interval,
                 startDate: dateRange.start,

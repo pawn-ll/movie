@@ -6,6 +6,7 @@
   import { ref, onMounted, onUnmounted, watchEffect } from 'vue';
   import * as echarts from 'echarts';
   import axios from 'axios';
+  import { apis } from '@/ApiConfig';
   
   // 声明 movieCode prop
   let { movieCode } = defineProps({
@@ -21,7 +22,7 @@
   // 获取票房数据的函数
   async function fetchMoiveData(movieCodeValue) {
     try {
-        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/histoygram', {
+        const response = await axios.get(apis.dayHistoygram, {
         params: {
           movieCode: movieCodeValue,
         },

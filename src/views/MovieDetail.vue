@@ -33,6 +33,7 @@
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import * as echarts from 'echarts';
+import { apis } from '@/ApiConfig';
 
 const goBack = () => {
   if (typeof window !== 'undefined') { // 确保在浏览器环境中执行
@@ -67,7 +68,7 @@ const movie = ref({
 async function fetchMoiveData(movieCodeValue) {
         // console.log(movieCodeValue);
         try {
-            const response = await axios.get('http://1.14.58.251:8081/movie/detail',{
+            const response = await axios.get(apis.movieDetail,{
             params:{
                 movieCode: movieCodeValue,
             }
@@ -82,7 +83,7 @@ async function fetchMoiveData(movieCodeValue) {
 };
 async function fetchMoiveLine(movieCodeValue) {
     try {
-        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/week-histoygram',{
+        const response = await axios.get(apis.weekHistoygram,{
         params:{
             movieCode: movieCodeValue,
         }

@@ -51,6 +51,7 @@
    import axios from 'axios';
    import SearchBox from '@/components/SearchBox.vue'
    import TypeBox from '@/components/TypeBox.vue'
+   import { apis } from '@/ApiConfig';
 
    export default {
     components: {
@@ -84,12 +85,12 @@
         day.value = dayjs(day.value).subtract(1, 'day');
         const dayString = dayjs(day.value).format('YYYY-MM-DD');
         dayStr.value = dayString;
-        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/day',{
+        const response = await axios.get(apis.dailyBoxoffice,{
             params:{
                 date: dayString,
             }
             });
-        const sumResponse = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/day',{
+        const sumResponse = await axios.get(apis.dailyBoxofficeSum,{
             params:{
                 date: dayString,
             }
@@ -109,12 +110,12 @@
         day.value = dayjs(day.value).subtract(-1, 'day');
         const dayString = dayjs(day.value).format('YYYY-MM-DD');
         dayStr.value = dayString;
-        const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/day',{
+        const response = await axios.get(apis.dailyBoxoffice,{
             params:{
                 date: dayString,
             }
             });
-        const sumResponse = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/day',{
+        const sumResponse = await axios.get(apis.dailyBoxofficeSum,{
             params:{
                 date: dayString,
             }
@@ -132,7 +133,7 @@
        // 异步获取数据
        async function getBoxOffice() {
          try {
-          const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/today'); // 替换为你的实际API URL
+          const response = await axios.get(apis.todayDailyBoxoffice); // 替换为你的实际API URL
           const data = await response.data;
           // console.log(response);
           // console.log(data);
@@ -145,7 +146,7 @@
        }
        async function getDaySum() {
          try {
-          const response = await axios.get('http://1.14.58.251:8081/dailySumBoxoffice/today'); // 替换为你的实际API URL
+          const response = await axios.get(apis.todayDailyBoxofficeSum); // 替换为你的实际API URL
           const data = await response.data;
           boxOfficeTotal.value = data.data.sumBoxoffice;
           // console.log(data);

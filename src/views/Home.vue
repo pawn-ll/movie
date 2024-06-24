@@ -23,6 +23,7 @@
   import BoxOfficeList from '@/components/BoxOfficeList.vue';
   import { ref } from 'vue';
   import axios from 'axios';
+  import { apis } from '@/ApiConfig';
   
     export default  {
       components: {
@@ -45,7 +46,7 @@
         },
         async fetchWebsiteVisits() {
           try {
-          const response = await axios.get('http://1.14.58.251:8081/site/count'); // 请替换为实际的API路径
+          const response = await axios.get(apis.homeCount); // 请替换为实际的API路径
           console.log(response);
           // this.totalVisits = response.data.data.siteVisitorCount;
           this.todayVisits = response.data.data.siteVisitorTodayCount;

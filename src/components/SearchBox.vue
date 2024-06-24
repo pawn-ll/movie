@@ -5,6 +5,7 @@
       v-model="searchKeyword" 
       placeholder="请输入搜索关键词" 
       class="search-input" 
+      @keyup.enter="search" 
     />
     <button @click="search" class="search-button">搜索</button>
   </div>

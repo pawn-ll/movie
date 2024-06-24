@@ -47,7 +47,7 @@
 <script setup>
 import { ref, computed, onMounted} from 'vue';
 import SearchBox from '@/components/SearchBox.vue'
-
+import { apis } from '@/ApiConfig';
 import axios from 'axios';
 
 const props = defineProps({
@@ -74,7 +74,7 @@ async function fetchResults(movieNameValue) {
   try {
     loading.value = true;
     console.log(movieNameValue);
-    const response = await axios.post('http://1.14.58.251:8081/movie/search', {
+    const response = await axios.post(apis.searchResult, {
         movieName: movieNameValue,
         current: currentPage.value,
         size: pageSize,

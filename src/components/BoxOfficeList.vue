@@ -16,6 +16,7 @@
 <script setup>
 import { ref,  onMounted , getCurrentInstance } from 'vue';
 import axios from 'axios';
+import { apis } from '@/ApiConfig';
 
 
 let latestMovies = ref([]);
@@ -24,7 +25,7 @@ let router = ref(null);
 
 async function getList(){
     try {
-          const response = await axios.get('http://1.14.58.251:8081/dailyBoxoffice/week-list'); 
+          const response = await axios.get(apis.boxofficeWeekList); 
         //   console.log(data);
           latestMovies.value = response.data.data;
          } 
