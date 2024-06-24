@@ -46,7 +46,7 @@ onMounted(() =>{
     getList();
     const appInstance = getCurrentInstance();
     router.value = appInstance.appContext.config.globalProperties.$router;
-    console.log(router.value);
+    // console.log(router.value);
 });
 
 </script>

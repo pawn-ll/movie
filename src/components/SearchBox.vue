@@ -42,7 +42,7 @@ const emit = defineEmits(['search']);
 onMounted(() =>{
     const appInstance = getCurrentInstance();
     router.value = appInstance.appContext.config.globalProperties.$router;
-    console.log(router.value);
+    // console.log(router.value);
 });
   </script>
 

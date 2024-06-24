@@ -15,8 +15,10 @@
        <el-table  :data="movies"  style="width: 100%" v-if="!loading">
         <el-table-column prop="movieName" label="电影名称" width="220">
             <template #default="{ row }">
-            <span :style="{ fontWeight: 'bold', color: '#333',fontSize:'15px' }">{{ row.movieName }}</span>
-            </template>
+            <p :style="{ fontWeight: 'bold', color: '#333',fontSize:'15px' }">{{ row.movieName }}</p>
+            <p :style="{ fontSize:'12px' }" v-if="row.releaseDays>0">已上映：{{ row.releaseDays }} 天</p>
+            <p :style="{ fontSize:'12px' }" v-if="row.releaseDays<0">点映</p>
+          </template>
          </el-table-column>
          <el-table-column prop="sumBoxoffice" label="目前总票房"></el-table-column>
          <el-table-column prop="dayBoxoffice" label="今日票房（万元）"></el-table-column>
@@ -95,8 +97,8 @@
                 date: dayString,
             }
             });
-        console.log(response);
         movies.value = response.data.data;
+        console.log(movies.value);
         boxOfficeTotal.value = sumResponse.data.data.sumBoxoffice;
         if (timerId != null) {
         clearInterval(timerId);
@@ -120,7 +122,7 @@
                 date: dayString,
             }
             });
-        console.log(response);
+        console.log(response.data.data);
         movies.value = response.data.data;
         boxOfficeTotal.value = sumResponse.data.data.sumBoxoffice;
         if (timerId != null) {

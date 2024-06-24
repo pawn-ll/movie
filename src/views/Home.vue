@@ -47,7 +47,7 @@
         async fetchWebsiteVisits() {
           try {
           const response = await axios.get(apis.homeCount); // 请替换为实际的API路径
-          console.log(response);
+          // console.log(response);
           // this.totalVisits = response.data.data.siteVisitorCount;
           this.todayVisits = response.data.data.siteVisitorTodayCount;
         
