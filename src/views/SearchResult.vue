@@ -7,7 +7,7 @@
         </header>
       <div v-if="loading" class="loading">加载中...</div>
       <div v-if="error" class="error">{{ error }}</div>
-      <div v-if="totalPages < 1">
+      <div v-if="results.length === 0">
         <p>暂无搜索结果</p>
       </div>
       <div v-if="results.length > 0">
@@ -85,7 +85,7 @@ async function fetchResults(movieNameValue) {
   });
     results.value = response.data.data.records; 
     totalPages.value = response.data.data.pages; // 假设API返回了总页数
-    console.log(totalPages.value);
+    // console.log(totalPages.value);
     error.value = null;
   } catch (err) {
     console.log(err);

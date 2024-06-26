@@ -16,8 +16,8 @@
         <el-table-column prop="movieName" label="电影名称" width="220">
             <template #default="{ row }">
             <p :style="{ fontWeight: 'bold', color: '#333',fontSize:'15px' }">{{ row.movieName }}</p>
-            <p :style="{ fontSize:'12px' }" v-if="row.releaseDays>0">已上映：{{ row.releaseDays }} 天</p>
-            <p :style="{ fontSize:'12px' }" v-if="row.releaseDays<0">点映</p>
+            <p :style="{ fontSize:'14px' }" v-if="row.releaseDays>0">上映 <span :style="{ color: 'red' }">{{ row.releaseDays }}</span> 天</p>
+            <p :style="{ fontSize:'14px' ,color:'red' }" v-if="row.releaseDays<0">点映</p>
           </template>
          </el-table-column>
          <el-table-column prop="sumBoxoffice" label="目前总票房"></el-table-column>

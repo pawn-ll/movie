@@ -1,6 +1,6 @@
 // config.js
 
-const apiBaseUrl = 'http://1.14.58.251:8081';
+const apiBaseUrl = 'http://116.198.228.160:8081';
 
 const apis = {
   // apiBaseUrl: 'http://localhost:8081',
