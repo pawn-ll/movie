@@ -3,7 +3,6 @@
 const apiBaseUrl = 'http://116.198.228.160:8081';
 
 const apis = {
-  // apiBaseUrl: 'http://localhost:8081',
   apiBaseUrl: apiBaseUrl,
   // DailyBoxoffice.vue
   dailyBoxoffice: apiBaseUrl + '/dailyBoxoffice/day',
@@ -13,6 +12,7 @@ const apis = {
   // MovieDetail.vue
   movieDetail:apiBaseUrl +'/movie/detail',
   weekHistoygram: apiBaseUrl + '/dailyBoxoffice/week-histoygram',
+  moviePoster: apiBaseUrl + '/movie/poster',
   //SearchResult.vue
   searchResult: apiBaseUrl + '/movie/search',
   //StatisPage.vue

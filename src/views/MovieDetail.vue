@@ -3,8 +3,8 @@
   <div class="movie-detail" >
     <h1 class="movie-name" v-if="movie.movieName">{{ movie.movieName }}</h1>
     <div class="poster-info-container">
-      <div class="movie-poster">
-        <img :src="movie.posterBase64" alt="电影海报" class="movie-poster" />
+      <div class="movie-poster" v-if="poster">
+        <img :src="poster" alt="电影海报" class="movie-poster" />
       </div>
       <div class="movie-meta">
       
@@ -50,6 +50,7 @@ const props = defineProps({
 const chartContainer = ref(null);
 let chartInstance = null;
 const line = ref(true);
+const poster = ref('');
 const movie = ref({
   movieName: '',
   poster: '',
@@ -75,6 +76,22 @@ async function fetchMoiveData(movieCodeValue) {
             })
             // console.log(response);
             movie.value = response.data.data;
+        } 
+        catch (error) {
+          console.error('获取电影详情失败:', error);
+        }
+};
+
+async function fetchMoivePoster(movieCodeValue) {
+        // console.log(movieCodeValue);
+        try {
+            const response = await axios.get(apis.moviePoster,{
+            params:{
+                movieCode: movieCodeValue,
+            }
+            })
+            console.log(response);
+            poster.value = response.data.data.posterBase64;
             
         } 
         catch (error) {
@@ -142,6 +159,7 @@ async function updateChartWithData(movieCodeValue) {
 onMounted(() => {
     // console.log(props.movieCode);
     fetchMoiveData(props.movieCode);
+    fetchMoivePoster(props.movieCode);
     updateChartWithData(props.movieCode);
     // console.log(movie);
 });
