@@ -4,7 +4,13 @@
     <h1 class="movie-name" v-if="movie.movieName">{{ movie.movieName }}</h1>
     <div class="poster-info-container">
       <div class="movie-poster" v-if="poster">
-        <img :src="poster" alt="电影海报" class="movie-poster" />
+        <img :src="poster" alt="电影海报" class="movie-poster" @click="showModal = true" />
+      </div>
+      <div class="modal" v-if="showModal">
+        <div class="modal-content">
+          <span class="close" @click="showModal = false">&times;</span>
+          <img :src="poster" alt="电影海报" class="modal-image" />
+        </div>
       </div>
       <div class="movie-meta">
       
@@ -65,6 +71,7 @@ const movie = ref({
   sumBoxOffice: '',
   introduction:''
 });
+const showModal =  ref(false);
 
 async function fetchMoiveData(movieCodeValue) {
         // console.log(movieCodeValue);
@@ -238,5 +245,43 @@ onMounted(() => {
   font-weight: bolder;
   background: #488ae6;
   height: 50px;
+}
+.modal {
+  display: block;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  margin: 15% auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: 100%;
+  transform: scale(1.3);
+  transform-origin: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 25px;
+  color: #f1f1f1;
+  font-size: 35px;
+  font-weight: bold;
+  cursor: pointer;
 }
 </style>
