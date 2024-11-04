@@ -98,7 +98,7 @@ async function fetchMoivePoster(movieCodeValue) {
             }
             })
             console.log(response);
-            poster.value = response.data.data.posterBase64;
+            poster.value = response.data.data;
             
         } 
         catch (error) {

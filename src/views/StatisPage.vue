@@ -7,6 +7,7 @@
             <span :style="{ fontWeight: 'bold', color: '#333',fontSize:'15px' }">{{ row.movieName }}</span>
             </template>
          </el-table-column>
+         <el-table-column prop="statisInterval" label="统计时间"></el-table-column>
          <el-table-column prop="statisSumBoxoffice" label="合计票房（万元）"></el-table-column>
          <el-table-column prop="avgBoxofficeRate" label="平均票房占比"></el-table-column>
          <el-table-column prop="avgArrangeRate" label="平均排片率"></el-table-column>
