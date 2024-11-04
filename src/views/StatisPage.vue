@@ -1,5 +1,6 @@
 <template>
   <button @click="goBack" class="back-button">返回</button>
+  <Export />
 <div class="table-container" >
        <el-table  :data="movies"  style="width: 100%" >
          <el-table-column prop="movieName" label="电影名称" width="220">
@@ -37,10 +38,12 @@
 import { ref,  onMounted } from 'vue';
 import axios from 'axios';
 import { apis } from '@/ApiConfig';
-
+import Export from '@/components/ExportStatis.vue';
 
 export default {
-   
+  components:{
+    Export,
+  },
     data(){
         return{
             isFetching: false,

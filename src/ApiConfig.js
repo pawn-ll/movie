@@ -1,7 +1,7 @@
 // config.js
 
-const apiBaseUrl = 'http://116.198.228.160:8081';
-// const apiBaseUrl = 'http://localhost:8081';
+// const apiBaseUrl = 'http://116.198.228.160:8081';
+const apiBaseUrl = 'http://localhost:8081';
 
 const apis = {
   apiBaseUrl: apiBaseUrl,
@@ -23,7 +23,10 @@ const apis = {
   //BoxofficeList.vue
   boxofficeWeekList: apiBaseUrl + '/dailyBoxoffice/week-list',
   //DayBar.vue
-  dayHistoygram : apiBaseUrl + '/dailySumBoxoffice/histoygram'
+  dayHistoygram : apiBaseUrl + '/dailySumBoxoffice/histoygram',
+  //ExportStatis.vue
+  exportStatis: apiBaseUrl + '/statisBoxoffice/export',
+
 
 
   
